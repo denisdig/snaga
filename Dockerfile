@@ -6,6 +6,10 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libzip-dev \
     libpq-dev \
+    libxml2-dev \
+    zlib1g-dev \
+    libonig-dev \
+    build-essential \
     && docker-php-ext-install pdo pdo_pgsql mbstring tokenizer xml ctype json
 
 # Installer Composer
