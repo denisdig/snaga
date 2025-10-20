@@ -1,10 +1,10 @@
-# Utiliser PHP CLI avec Apache (ou juste CLI si tu veux le serveur intégré)
+# 1️⃣ Base PHP 8.2 CLI
 FROM php:8.2-cli
 
-# Définir le répertoire de travail
+# 2️⃣ Définir le répertoire de travail
 WORKDIR /app
 
-# Installer les dépendances système nécessaires
+# 3️⃣ Installer les dépendances système nécessaires
 RUN apt-get update && apt-get install -y \
     libzip-dev \
     unzip \
@@ -15,17 +15,25 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo pdo_mysql intl mbstring zip \
     && apt-get clean
 
-# Installer Composer
+# 4️⃣ Installer Composer (gestionnaire PHP)
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copier tous les fichiers du projet dans le container
+# 5️⃣ Copier tous les fichiers du projet
 COPY . .
 
-# Installer les dépendances PHP
+# 6️⃣ Définir l'environnement Symfony en production
+ENV APP_ENV=prod
+ENV APP_DEBUG=0
+
+# 7️⃣ Installer les dépendances PHP (sans dev pour la prod)
 RUN composer install --no-dev --optimize-autoloader
 
-# Exposer le port utilisé par Render
+# 8️⃣ Vider et précharger le cache Symfony pour prod
+RUN php bin/console cache:clear --env=prod
+RUN php bin/console cache:warmup --env=prod
+
+# 9️⃣ Exposer le port attendu par Render
 EXPOSE 10000
 
-# Lancer le serveur Symfony
+# 🔟 Lancer Symfony en serveur intégré sur Render
 CMD ["php", "-S", "0.0.0.0:10000", "-t", "public"]
