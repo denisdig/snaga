@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit - {{ products.name }}{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/snagaafficheP.css') }}">
+{% endblock %}
+
+{% block body %}
+{% include('_navbar.html.twig') %}
+
+<div class="product-page container my-5">
+    <div class="row g-4">
+        <!-- Image produit -->
+        <div class="col-md-5 text-center">
+            <img src="{{ asset('image/product/' ~ products.picture) }}" alt="{{ products.name }}" class="product-img shadow-sm rounded">
+        </div>
+
+        <!-- Infos produit -->
+        <div class="col-md-7 d-flex flex-column justify-content-center">
+            <h2 class="product-title">{{ products.name }}</h2>
+            <p class="product-price">{{ products.price }} €</p>
+            <p class="product-desc">{{ products.description }}</p>
+
+            {% if app.user %}
+                <a href="{{ path('app_panier_add', {'id': products.id }) }}" class="btn btn-success btnPanier mt-3 w-50">Ajouter au panier</a>
+            {% else %}
+                <p class="login-msg mt-3">Pour ajouter ce produit au panier, veuillez créer un compte ou vous connecter :  
+                    <a href="{{ path('app_register') }}">S'inscrire</a>
+                </p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Commentaires -->
+    <div class="comments mt-5 shadow p-4 bg-white rounded">
+        <h3>Commentaires</h3>
+
+        {% for comment in products.commentaires %}
+            <div class="comment shadow-sm p-3 mb-3 rounded">
+                <p class="comment-text">{{ comment.text }}</p>
+                <p class="comment-meta">{{ comment.user.pseudo }} - {{ comment.createdAt|date('d/m/Y H:i') }}</p>
+            </div>
+        {% else %}
+            <p>Soyez le premier à laisser votre avis</p>
+        {% endfor %}
+
+        {% if app.user %}
+            {{ form_start(form) }}
+                {{ form_row(form.text) }}
+                <input type="submit" value="Enregistrer mon commentaire" class="btn btn-primary mt-3 w-100">
+            {{ form_end(form) }}
+        {% else %}
+            <h4 class="mt-3">Veuillez vous connecter pour laisser votre avis</h4>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

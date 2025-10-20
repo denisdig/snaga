@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Panier{% endblock %}
+
+{% block body %}
+<h1>Mon Panier</h1>
+
+{% if cart.items|length == 0 %}
+    <p>Votre panier est vide.</p>
+{% else %}
+    <table>
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Prix unitaire</th>
+                <th>Quantité</th>
+                <th>Sous-total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart.items %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.product.price }} €</td>
+                    <td>
+                        <form action="{{ path('cart_update', {'id': item.product.id}) }}" method="POST">
+                            <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                            <button type="submit">Mettre à jour</button>
+                        </form>
+                    </td>
+                    <td>{{ item.getSubtotal() }} €</td>
+                    <td>
+                        <a href="{{ path('cart_remove', {'id': item.product.id}) }}">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p><strong>Total : {{ total }} €</strong></p>
+
+    {# Bouton Passer la commande après la boucle #}
+    <a href="{{ path('order_create') }}" class="btn btn-success mt-3">Passer la commande</a>
+
+    <a href="{{ path('cart_clear') }}" class="btn btn-danger mt-2">Vider le panier</a>
+{% endif %}
+
+<a href="{{ path('app_home') }}">Continuer vos achats</a>
+{% endblock %}

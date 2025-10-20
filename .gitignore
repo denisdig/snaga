@@ -23,3 +23,17 @@
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
+# Fichier .env principal (à ignorer)
+.env
+
+# Fichiers d'éditeur (optionnel mais conseillé)
+.idea/
+.vscode/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Si tu utilises npm / asset-mapper avec build
+/node_modules/
+/public/build/

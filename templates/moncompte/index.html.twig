@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('css/moncompte.css') }}">
+  <script src="{{ asset('js/snaga.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+  {% include ('_navbar.html.twig') %}
+
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <section class="infoscompte col-lg-8 p-4 rounded shadow-sm">
+
+        <h2 class="text-center mb-4">👤 Mon compte</h2>
+
+        <div class="compte-section mb-4">
+          <p class="fw-semibold">Voir les informations de mon compte :</p>
+          <a href="{{ path('app_info') }}" class="btn btn-primary btn-lg w-100">Mes informations</a>
+        </div>
+
+        <div class="compte-section mb-4">
+          <p class="fw-semibold">Modifier mes informations :</p>
+          <a href="{{ path('app_infonvl', {'id': app.user.id}) }}" class="btn btn-warning btn-lg w-100">Changer mes infos</a>
+        </div>
+
+        <div class="compte-section">
+          <p class="fw-semibold text-danger">Supprimer mon compte définitivement :</p>
+          <a href="{{ path('app_infosupp', {'id': app.user.id}) }}" class="btn btn-danger btn-lg w-100">Supprimer mon compte</a>
+        </div>
+
+      </section>
+    </div>
+  </div>
+{% endblock %}

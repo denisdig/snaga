@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire utilisateur{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>{{ user is defined ? 'Modifier un utilisateur' : 'Ajouter un utilisateur' }}</h1>
+
+    {{ form_start(formUser) }}
+        <div class="mb-3">
+            {{ form_row(formUser.email) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_row(formUser.pseudo) }}
+        </div>
+        <div class="mb-3">
+            {{ form_row(formUser.adresse) }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <a href="{{ path('app_user_index') }}" class="btn btn-secondary">Retour</a>
+    {{ form_end(formUser) }}
+</div>
+{% endblock %}

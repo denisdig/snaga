@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche utilisateur{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Fiche utilisateur</h1>
+
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Email :</strong> {{ user.email }}</li>
+        <li class="list-group-item"><strong>Pseudo :</strong> {{ user.pseudo }}</li>
+        <li class="list-group-item"><strong>Adresse :</strong> {{ user.adresse }}</li>
+    </ul>
+
+    <div class="mt-3">
+        <a href="{{ path('app_user_edit', {id: user.id}) }}" class="btn btn-warning">Modifier</a>
+        <a href="{{ path('app_user_index') }}" class="btn btn-secondary">Retour</a>
+    </div>
+</div>
+{% endblock %}

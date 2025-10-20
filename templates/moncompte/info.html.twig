@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes informations{% endblock %}
+
+{% block body %}
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+
+        <div class="card shadow-sm border-0 rounded">
+          <div class="card-body">
+            <h3 class="card-title mb-4 text-center">👤 Mes informations</h3>
+
+            <p><strong>Mon mail :</strong> {{ app.user.email }}</p>
+            <p><strong>Mon pseudo :</strong> {{ app.user.pseudo }}</p>
+            <p><strong>Mon Adresse :</strong> {{ app.user.adresse }}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/snagalogin.css') }}">
+{% endblock %}
+
+{% block body %}
+   
+   
+{% include ('_navbar.html.twig') %}
+
+
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="mb-3">
+                        Vous etes connecte en tant que {{ app.user.userIdentifier }},
+                        <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% endif %}
+
+                <form method="post">
+                    <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
+
+                    <label for="inputEmail">Email</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+
+                    <label for="inputPassword">Password</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Se souvenir de moi
+                        </label>
+                    </div>
+
+                    <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
+
+                    <button class="btn btn-lg btn-primary w-100 mt-3" type="submit">
+                        Se connecter
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

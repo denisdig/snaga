@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/snagaregister.css') }}">
+{% endblock %}
+
+{% block body %}
+{% include('_navbar.html.twig') %}
+
+<div class="register-page d-flex justify-content-center align-items-center">
+    <div class="register-form shadow p-4 rounded">
+        <h2 class="text-center mb-4">Créer un compte</h2>
+
+        {{ form_start(registrationForm, {'attr': {'class': 'form'}}) }}
+
+            {{ form_errors(registrationForm) }}
+
+            <span class="input-span">
+                {{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'label'}}) }}
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'input', 'id': 'email'}}) }}
+                {{ form_errors(registrationForm.email) }}
+            </span>
+
+            <span class="input-span">
+                {{ form_label(registrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class': 'label'}}) }}
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'input', 'id': 'password'}}) }}
+                {{ form_errors(registrationForm.plainPassword) }}
+            </span>
+
+            <span class="input-span">
+                {{ form_row(registrationForm.agreeTerms) }}
+            </span>
+
+            <input class="submit" type="submit" value="S'inscrire" />
+
+        {{ form_end(registrationForm) }}
+    </div>
+</div>
+
+{% endblock %}

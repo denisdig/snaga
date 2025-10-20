@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la catégorie{% endblock %}
+
+{% block body %}
+    <h1 class="h3 mb-4">Catégorie : {{ category.name }}</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <p><strong>ID :</strong> {{ category.id }}</p>
+            <p><strong>Nom :</strong> {{ category.name }}</p>
+
+            <a href="{{ path('app_category_edit', {id: category.id}) }}" class="btn btn-warning">Modifier</a>
+            <a href="{{ path('app_category_index') }}" class="btn btn-secondary">Retour</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+.infoscompte {
+    background-color: #ffe2dc;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.infoscompte h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #333;
+}
+
+.compte-section p {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.btn-lg {
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-lg:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}

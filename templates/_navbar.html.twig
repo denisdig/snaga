@@ -1,0 +1,90 @@
+{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+<nav class="navbar navbar-expand-lg bg-light py-2">
+  <div class="container-fluid">
+    <a href="{{ path('app_home') }}" class="navbar-brand custom-brand">SNAGA</a>
+    
+    <div class="ms-auto d-flex align-items-center gap-3">
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="1.6em" height="1.6em">
+            <path d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"/>
+          </svg>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+          <li><a class="dropdown-item" href="{{ path('app_login') }}">Connexion</a></li>
+          <li><a class="dropdown-item" href="{{ path('app_register') }}">Inscription</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+{% endif %}
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+<nav class="navbar navbar-expand-lg bg-light py-2">
+  <div class="container-fluid">
+    <a href="{{ path('app_home') }}" class="navbar-brand custom-brand">SNAGA</a>
+
+    <div class="ms-auto d-flex align-items-center gap-3">
+
+      {% if is_granted('ROLE_ADMIN') %}
+        <a class="btn btn-outline-primary" href="{{ path('app_admin') }}">Back Office</a>
+      {% endif %}
+
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="1.4em" height="1.4em">
+            <path d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"/>
+          </svg>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+          <li><a class="dropdown-item" href="{{ path('app_moncompte') }}">Mon compte</a></li>
+          <li><a class="dropdown-item" href="{{ path('order_list') }}">Mes commandes</a></li>
+          </li>
+        </ul>
+      </div>
+
+      <a href="{{ path('cart_index') }}" class="btn btn-outline-secondary position-relative">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="1.4em" height="1.4em">
+          <circle cx="9" cy="21" r="1"/>
+          <circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+      </a>
+
+      <a href="{{ path('app_logout') }}" class="btn btn-outline-danger d-flex align-items-center gap-1">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="1.5em" height="1.5em">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+        Déconnexion
+      </a>
+
+    </div>
+  </div>
+</nav>
+{% endif %}
+
+<style>
+.custom-brand { 
+  font-size: 30px !important; 
+  font-family: 'Montserra', sans-serif;
+  font-weight: normal;  /* <-- ici pour enlever le gras */
+  text-transform: none;  /* pas de majuscules forcées */
+}
+
+
+.navbar .btn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.navbar .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.dropdown-toggle::after {
+  margin-left: 0.5rem;
+}
+</style>

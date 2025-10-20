@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product is defined ? 'Modifier' : 'Ajouter' }} un produit{% endblock %}
+
+{% block body %}
+    <h1 class="h3 mb-4">{{ product is defined ? 'Modifier' : 'Ajouter' }} un produit</h1>
+
+    <div class="card">
+        <div class="card-body">
+            {{ form_start(formProduct) }}
+                <div class="row g-3">
+                    {% for field in formProduct %}
+                        <div class="col-md-6">
+                            {{ form_row(field) }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-success">
+                        {{ product is defined ? 'Enregistrer les modifications' : 'Ajouter le produit' }}
+                    </button>
+                    <a href="{{ path('app_product_index') }}" class="btn btn-secondary">Annuler</a>
+                </div>
+            {{ form_end(formProduct) }}
+        </div>
+    </div>
+{% endblock %}

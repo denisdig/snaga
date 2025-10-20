@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Commandes{% endblock %}
+
+{% block body %}
+<h1 class="mb-4">Mes Commandes</h1>
+
+{% if orders is empty %}
+    <p>Vous n'avez pas encore passé de commandes.</p>
+{% else %}
+    {% for order in orders %}
+        <div class="order-card mb-4 p-3 border rounded">
+            <h3>Commande #{{ order.id }} - {{ order.createdAt|date('d/m/Y H:i') }}</h3>
+            <p>Status : <strong>{{ order.status }}</strong></p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Produit</th>
+                        <th>Prix unitaire</th>
+                        <th>Quantité</th>
+                        <th>Sous-total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in order.items %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.price }} €</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ (item.quantity * item.price)|number_format(2, ',', ' ') }} €</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p><strong>Total : {{ order.total }} €</strong></p>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<a href="{{ path('app_home') }}" class="btn btn-primary mt-3">Continuer vos achats</a>
+{% endblock %}

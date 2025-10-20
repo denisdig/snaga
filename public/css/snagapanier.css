@@ -1,0 +1,53 @@
+*
+{
+    margin:0;
+    padding:0;
+}
+/* Début de l'import pour la nav*/
+/* marque SNAGA dans la nav*/
+.custom-brand{ 
+    font-size: 30px !important;
+    font-family: 'Montserra';
+}
+/* le bouton dans la nav principal connexion*/
+.btn-menuiio
+{
+  margin-right: -90px;
+  margin-top: -4px;
+}
+/* le bouton panier dans la nav principal*/
+.btn2025
+{
+  margin-left: -80px;
+}
+/* From Uiverse.io by faxriddin20 debut nav principal */
+.button-container {
+  display: flex;
+  background-color: #f8f9fa;;
+  width: 250px;
+  height: 40px;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+}
+
+.button {
+  outline: 0 !important;
+  border: 0 !important;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  transition: all ease-in-out 0.3s;
+  cursor: pointer;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+}
+
+/* fin de l'import pour la nav*/

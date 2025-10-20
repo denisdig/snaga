@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier mes informations{% endblock %}
+
+{% block body %}
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+
+        <div class="card shadow-sm border-0 rounded">
+          <div class="card-body">
+            <h3 class="card-title mb-4 text-center">✏️ Modifier mes informations</h3>
+
+            {{ form_start(form) }}
+              <div class="mb-3">
+                {{ form_row(form.email) }}
+              </div>
+              <div class="mb-3">
+                {{ form_row(form.pseudo) }}
+              </div>
+              <div class="mb-3">
+                {{ form_row(form.adresse) }}
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100 mt-3">
+                Modifier mes infos
+              </button>
+            {{ form_end(form) }}
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

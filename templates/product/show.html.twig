@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du produit{% endblock %}
+
+{% block body %}
+    <h1 class="h3 mb-4">{{ product.name }}</h1>
+
+    <div class="card shadow-sm">
+        <div class="row g-0">
+            {% if product.picture %}
+                <div class="col-md-4">
+                    <img src="{{ asset('image/product/' ~ product.picture) }}" class="img-fluid rounded-start" alt="Produit">
+                </div>
+            {% endif %}
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text"><strong>Prix :</strong> {{ product.price }} €</p>
+                    <p class="card-text"><strong>Description :</strong> {{ product.description }}</p>
+                    <a href="{{ path('app_product_edit', {id: product.id}) }}" class="btn btn-warning">Modifier</a>
+                    <a href="{{ path('app_product_index') }}" class="btn btn-secondary">Retour à la liste</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

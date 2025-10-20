@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Snaga.com{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/snagahome.css') }}">
+{% endblock %}
+
+{% block body %}
+
+{% include ('_navbar.html.twig') %}
+
+<!-- Bannière -->
+<div class="banner mt-4">
+    <img src="{{ asset('images/fondpp01.jpg') }}" alt="Bannière Snaga" class="w-100 banner-img">
+</div>
+
+<!-- Menu catégories stylisé -->
+<ul class="navTypes">
+    {% for cat in category %}
+        <li>
+            <a href="{{ path('app_afficher_category', {'id': cat.id}) }}">
+                {{ cat.name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
+
+
+
+<!-- Produits -->
+<div class="container blockP">
+    <div class="row g-4">
+        {% for product in products %}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mobilev">
+                <div class="cardP h-100">
+                    <img src="{{ asset('image/product/' ~ product.picture) }}" alt="{{ product.name }}" class="imgtaille card-img-top">
+                    <div class="card-body d-flex flex-column text-center">
+                        <h5 class="product-title">{{ product.name }}</h5>
+                        <p class="product-desc">{{ product.description|length > 60 ? product.description[:57] ~ '...' : product.description }}</p>
+                        <p class="product-category">{{ product.category.name }}</p>
+                        <p class="product-price">{{ product.price }} €</p>
+                        <div class="mt-auto d-grid gap-2">
+                            <a href="{{ path('app_afficher', {'id': product.id }) }}" class="btn btn-outline-dark w-100">Voir</a>
+                            {% if app.user %}
+                                <a href="{{ path('app_panier_add', {'id': product.id }) }}" class="btn btn-success w-100 btnPanier">Ajouter au panier</a>
+                            {% else %}
+                                <p class="login-msg">Veuillez vous connecter pour ajouter au panier</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+<!-- Footer -->
+<footer class="footer mt-5">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-md-4 mb-4">
+                <h3>Services client</h3>
+                <ul>
+                    <li><a href="{{ path('app_lorem') }}">Les informations legales</a></li>
+                    <li><a href="{{ path('app_lorem') }}">Nous contacter</a></li>
+                    <li><a href="{{ path('app_lorem') }}">Nos reseaux sociaux</a></li>
+                    <li><a href="{{ path('app_register') }}">Inscription</a></li>    
+                </ul>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h3>Légal et confidentialité</h3>
+                <ul>
+                    <li><a href="{{ path('app_lorem') }}">Condition d'utilisation</a></li>
+                    <li><a href="{{ path('app_lorem') }}">Conditions de vente</a></li>
+                    <li><a href="{{ path('app_lorem') }}">Politique de confidentialité</a></li>
+                    <li><a href="{{ path('app_lorem') }}">Politique de cookie</a></li>          
+                </ul>
+            </div>
+        </div>
+        <p>&copy; 2025 Snaga.com - Tous droits réservés</p>
+    </div>
+</footer>
+
+{% endblock %}
