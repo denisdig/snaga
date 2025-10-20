@@ -1,9 +1,18 @@
-FROM php:8.2.12-apache-bullseye
+# Utiliser PHP 8.2 avec Apache et Debian Bullseye
+FROM php:8.2-apache-bullseye
 
-# Installer dépendances système pour PostgreSQL et Symfony
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-       git unzip libzip-dev libpq-dev libxml2-dev zlib1g-dev libonig-dev build-essential curl \
+# Installer dépendances système nécessaires pour PostgreSQL et Symfony
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    unzip \
+    libzip-dev \
+    libpq-dev \
+    libxml2-dev \
+    zlib1g-dev \
+    libonig-dev \
+    build-essential \
+    curl \
+    pkg-config \
     && rm -rf /var/lib/apt/lists/*
 
 # Installer les extensions PHP nécessaires
