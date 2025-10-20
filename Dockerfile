@@ -1,17 +1,9 @@
-FROM php:8.2-apache
+FROM php:8.2.12-apache-bullseye
 
-# Installer les paquets système nécessaires
+# Installer dépendances système pour PostgreSQL et Symfony
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-       git \
-       unzip \
-       libzip-dev \
-       libpq-dev \
-       libxml2-dev \
-       zlib1g-dev \
-       libonig-dev \
-       build-essential \
-       curl \
+       git unzip libzip-dev libpq-dev libxml2-dev zlib1g-dev libonig-dev build-essential curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Installer les extensions PHP nécessaires
